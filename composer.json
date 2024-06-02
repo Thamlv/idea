@@ -29,13 +29,14 @@
         "spatie/laravel-query-builder": "^5.2"
       },
       "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.12",
         "laravel/sail": "^1.22",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^7.5",
         "phpunit/phpunit": "^10.2",
         "spatie/laravel-ignition": "^2.1"
-      },
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/",

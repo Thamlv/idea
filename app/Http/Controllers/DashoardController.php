@@ -9,7 +9,7 @@ class DashoardController extends Controller
 {
     function index()
     {
-        $idea = Idea::orderBy('created_at', 'desc');
+        $idea = Idea::OrderBy('created_at', 'desc');
         if (request()->has('search')) {
             $idea->where('content', 'like', '%' . request()->get('search', '') . '%');
         }
