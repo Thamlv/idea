@@ -14,8 +14,14 @@
                     @csrf
                     @method('delete')
                     <a href="{{route('ideas.show', $idea->id)}}"> View </a>
-                    <a class="ms-1" href="{{route('ideas.edit', $idea->id)}}"> Edit </a>
-                    <button type="submit" class="ms-1 btn btn-danger btn-sm"> X </button>
+                    @auth
+                        @can('update', $idea)
+                            <a class="ms-1" href="{{route('ideas.edit', $idea->id)}}"> Edit </a>
+                        @endcan
+                        @can('delete', $idea)
+                            <button type="submit" class="ms-1 btn btn-danger btn-sm"> X </button>
+                        @endcan
+                    @endauth
                 </form>
             </div>
         </div>
@@ -45,7 +51,7 @@
             </div>
             <div>
                 <span class="fs-6 fw-light text-muted"> <span class="fas fa-clock"> </span>
-                {{$idea->created_at}} </span>
+                {{$idea->created_at->toDateString()}} </span>
             </div>
         </div>
         @include('shared.comment-box')
