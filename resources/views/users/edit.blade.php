@@ -1,6 +1,6 @@
 @extends('layout.layout')
+@section('title', 'Edit User')
 @section('content')
-
 <div class="row">
     <div class="col-3">
         @include('shared.left-sidebar')

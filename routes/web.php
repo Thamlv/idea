@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('lang/{lang}', function ($lang) {
+    session()->put('lang', $lang);
+    return redirect()->route('dashboard');
+})->name('lang');
+
 Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
 // Route::group(['prefix' => 'ideas/', 'as' => 'ideas.'], function(){

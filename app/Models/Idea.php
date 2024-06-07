@@ -32,4 +32,9 @@ class Idea extends Model
     {
         return $this->belongsToMany(User::class, 'idea_like')->withTimestamps();
     }
+
+    public function scopeSearch($query, $search = '')
+    {
+        $query->where('content', 'like', '%' . $search . '%');
+    }
 }

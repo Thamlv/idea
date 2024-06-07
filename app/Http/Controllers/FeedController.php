@@ -12,7 +12,7 @@ class FeedController extends Controller
         $user = auth()->user();
         $followingIDs = $user->followings()->pluck('user_id');
 
-        $idea = Idea::whereIn('user_id', $followingIDs)->OrderBy('created_at', 'desc');
+        $idea = Idea::whereIn('user_id', $followingIDs)->latest();
 
         return view('dashboard', [
             'ideas' => $idea->paginate(5)

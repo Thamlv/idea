@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Idea;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 
 class DashboardController extends Controller
 {
     function index()
     {
-        $ideas = Cache::remember('ideas', 5, function(){
-            $idea = Idea::OrderBy('created_at', 'desc');
-            if (request()->has('search')) {
-                $idea->where('content', 'like', '%' . request()->get('search', '') . '%');
-            }
+        $idea = Idea::OrderBy('created_at', 'desc');
+        // if (request()->has('search')) {
+        //     $idea->search(request()->get('search', ''));
+        // }
 
-            $ideas = $idea->paginate(5);
-
-            return $ideas;
+        $idea->when(request()->has('search'), function ($query){
+            $query->search(request()->get('search', ''));
         });
+
+        $ideas = $idea->paginate(5);
 
         return view('dashboard', [
             'ideas' => $ideas
